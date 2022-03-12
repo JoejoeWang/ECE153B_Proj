@@ -1,15 +1,6 @@
+#include "buzzer.h"
 
-/*
- * ECE 153B - Winter 2022
- *
- * Name(s): Limin Ding, Xianqi Wang
- * Section: 7:00pm - 10:00pm Tuesday
- * Lab: 3B
- */
-  
-#include "stm32l476xx.h"
-
-void Trigger_Setup() {
+void Buzzer_Trigger_Setup() {
 	// Setup PA9
 	
 	// Enable the clock for GPIO Port A
@@ -56,7 +47,7 @@ void Trigger_Setup() {
 }
 
 
-int main(void) {	
+void Buzzer_On(void) {	
 	// Enable High Speed Internal Clock (HSI = 16 MHz)
 	RCC->CR |= RCC_CR_HSION;
 	while ((RCC->CR & RCC_CR_HSIRDY) == 0); // Wait until HSI is ready
@@ -67,6 +58,6 @@ int main(void) {
 	while ((RCC->CFGR & RCC_CFGR_SWS) == 0); // Wait until HSI is system clock source
 
 	// Trigger Setup
-	Trigger_Setup();
+	Buzzer_Trigger_Setup();
 	
 }
