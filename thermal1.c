@@ -24,11 +24,11 @@ void Thermal1_Init() {
 int get_thermal1(void) {	
 	Thermal1_Init();
 	
-	System_Clock_Init();   // System Clock = 80 MHz
-	SysTick_Init();
-	
-	SPI2_GPIO_Init();
-	SPI2_Init();
+//	System_Clock_Init();   // System Clock = 80 MHz
+//	SysTick_Init();
+//	
+//	SPI2_GPIO_Init();
+//	SPI2_Init();
 	
 //	LED_MATRIX_Init();
 

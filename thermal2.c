@@ -1,9 +1,4 @@
-#include "stm32l476xx.h"
-#include "LED.h"
-#include "SPI.h"
-#include "SysClock.h"
-#include "SysTimer.h"
-
+#include "thermal2.h"
 void Thermal2_Init() {
 	// Enable HSI
 	RCC->CR |= ((uint32_t)RCC_CR_HSION);
@@ -29,13 +24,13 @@ void Thermal2_Init() {
 int get_thermal2(void) {	
 	Thermal2_Init();
 	
-	System_Clock_Init();   // System Clock = 80 MHz
-	SysTick_Init();
-	
-	SPI2_GPIO_Init();
-	SPI2_Init();
-	
-//	LED_MATRIX_Init();
+//	System_Clock_Init();   // System Clock = 80 MHz
+//	SysTick_Init();
+//	
+//	SPI2_GPIO_Init();
+//	SPI2_Init();
+//	
+////	LED_MATRIX_Init();
 
 	uint32_t mask = 1UL<<4;
 	uint32_t thermal2 = (GPIOB->IDR & mask) == mask;
