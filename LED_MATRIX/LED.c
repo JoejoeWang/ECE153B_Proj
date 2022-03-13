@@ -85,7 +85,7 @@ void LED_5(void){
 
 
 void Detect_1(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_1();
@@ -95,7 +95,7 @@ void Detect_1(void){
 }
 
 void Detect_2(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_2();
@@ -105,7 +105,7 @@ void Detect_2(void){
 }
 
 void Detect_3(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_3();
@@ -115,7 +115,7 @@ void Detect_3(void){
 }
 
 void Detect_4(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_4();
@@ -125,7 +125,7 @@ void Detect_4(void){
 }
 
 void Detect_5(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_5();
@@ -143,6 +143,6 @@ void LED_send(uint16_t cmd_data){
 }
 
 void Delay(void){
-	for (int i = 0; i < 1000000; i++){
+	for (int i = 0; i < 200000; i++){
 	}
 }
