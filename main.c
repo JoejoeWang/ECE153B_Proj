@@ -595,31 +595,31 @@ int main(void) {
 		//it will give warning to the pilot on the fighter's control panel, which is LED
 		//And show the threaten's direction and buzzer will warn the pilot also.
 		// Show the result on the LED matrix
-		if (approach1 == 1 && get_thermal1() == 1 && get_thermal2() == 1){
+		if (approach1 == 1 && get_thermal1() == 1){//thermal1 detects left sides
 			Detect_1();
 			LED_Default();
 			Buzzer_Trigger_Setup();
 		}
 		
-		if (approach2 == 1 && get_thermal1() == 1 && get_thermal2() == 1){
+		if (approach2 == 1 && get_thermal1() == 1){
 			Detect_2();
 			LED_Default();
 			Buzzer_Trigger_Setup();
 		}
 		
-		if (approach3 == 1 && get_thermal1() == 1 && get_thermal2() == 1){
+		if (approach3 == 1 && get_thermal1() == 1 && get_thermal2() == 1){//central range needs two thermals
 			Detect_3();
 			LED_Default();
 			Buzzer_Trigger_Setup();
 		}
 		
-		if (approach4 == 1 && get_thermal1() == 1 && get_thermal2() == 1){
+		if (approach4 == 1 && get_thermal2() == 1){//thermal2 detects right sides
 			Detect_4();
 			LED_Default();
 			Buzzer_Trigger_Setup();
 		}
 
-		if (approach5 == 1 && get_thermal1() == 1 && get_thermal2() == 1){
+		if (approach5 == 1 && get_thermal2() == 1){
 			Detect_5();
 			LED_Default();
 			Buzzer_Trigger_Setup();
