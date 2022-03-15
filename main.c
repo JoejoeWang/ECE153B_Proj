@@ -604,7 +604,7 @@ int main(void) {
 				Detect_1();
 				LED_Default();
 				Buzzer_Trigger_Setup1();
-				printf("Our system saved your ass.\n");
+				printf("Missile spotted at 9 o'clock.\n");
 			}
 
 		}
@@ -613,33 +613,32 @@ int main(void) {
 			Detect_2();
 			LED_Default();
 			Buzzer_Trigger_Setup1();
-			printf("Our system saved your ass.\n");
+			printf("Missile spotted at 7 o'clock.\n\n");
 		}
 		
 		if (approach3 == 1  && get_thermal2()){
 			Detect_3();
 			LED_Default();
 			Buzzer_Trigger_Setup1();
-			printf("Our system saved your ass.\n");
+			printf("Missile spotted at 6 o'clock.\n");
 		}
 		
 		if (approach4 == 1  && get_thermal1()){
 			Detect_4();
 			LED_Default();
 			Buzzer_Trigger_Setup1();
-			printf("Our system saved your ass.\n");
+			printf("Missile spotted at 5 o'clock.\n");
 		}
 
 		if (approach5 == 1  && get_thermal1()){
 			Detect_5();
 			LED_Default();
 			Buzzer_Trigger_Setup1();
-			printf("Our system saved your ass.\n");
+			printf("Missile spotted at 3 o'clock.\n");
 		}
 		for (int i = 0; i < 1000000; i++){}
 		
 		Buzzer_Off();
-	
 	// Initialize UART -- change the argument depending on the part you are working on
 
 	}

@@ -46,7 +46,7 @@ void USART_Init(USART_TypeDef* USARTx) {
 	USARTx->CR1 &= ~USART_CR1_OVER8;
 	USARTx->CR2 &= ~USART_CR2_STOP;
 	//Set the baud rate to 9600.
-	USARTx->BRR = 8333;
+	USARTx->BRR = 1667;
 	// enable both the transmitter and receiver.
 	USARTx->CR1 |= USART_CR1_TE;
 	USARTx->CR1 |= USART_CR1_RE;

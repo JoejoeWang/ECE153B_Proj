@@ -11,7 +11,7 @@
 
 void LED_Init(void) {
 	LED_send(0x0900);       //  no decoding
-	LED_send(0x0A03);       //  brightness intensity
+	LED_send(0x0A0F);       //  brightness intensity
 	LED_send(0x0b07);       //  scan limit = 8 LEDs
 	LED_send(0x0c01);       //  power down =0,normal mode = 1
 	LED_send(0x0F00);       //  enable test display
