@@ -5761,8 +5761,8 @@ typedef struct
 #define  RCC_CR_MSIRANGE_3                   ((uint32_t)0x00000030U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 800 KHz */
 #define  RCC_CR_MSIRANGE_4                   ((uint32_t)0x00000040U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 1 MHz */
 #define  RCC_CR_MSIRANGE_5                   ((uint32_t)0x00000050U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 2 MHz */
-#define  RCC_CR_MSIRANGE_6                   ((uint32_t)0x00000060U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 4 MHz */
-#define  RCC_CR_MSIRANGE_7                   ((uint32_t)0x00000070U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 8 MHz */
+#define  RCC_CR_MSIRANGE_6                   ((uint32_t)0x00000060U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 4  MHz */
+#define  RCC_CR_MSIRANGE_7                   ((uint32_t)0x00000070U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 8 KHz */
 #define  RCC_CR_MSIRANGE_8                   ((uint32_t)0x00000080U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 16 MHz */
 #define  RCC_CR_MSIRANGE_9                   ((uint32_t)0x00000090U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 24 MHz */
 #define  RCC_CR_MSIRANGE_10                  ((uint32_t)0x000000A0U)       /*!< Internal Multi Speed oscillator (MSI) clock Range 32 MHz */

@@ -1,3 +1,12 @@
+
+/*
+ * ECE 153B - Winter 2022
+ *
+ * Name(s): Limin Ding, Xianqi Wang
+ * Section: 7:00pm - 10:00pm Tuesday
+ * Lab: 3B
+ */
+  
 #include "stm32l476xx.h"
 #include "LED.h"
 #include "SPI.h"
@@ -8,8 +17,8 @@
 #include "thermal2.h"
 #include "UART.h"
 
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
 uint32_t volatile currentValue1 = 0;
 uint32_t volatile lastValue1 = 0;
@@ -254,8 +263,8 @@ void Input_Capture4_Setup() {
 	
 	//Enable the clock for GPIO Port A
 	RCC->AHB2ENR |=	RCC_AHB2ENR_GPIOAEN;
-	GPIOA->MODER &= ~GPIO_MODER_MODE0;
-	GPIOA->MODER |= GPIO_MODER_MODE0_1;
+	GPIOA->MODER &= ~GPIO_MODER_MODE1;
+	GPIOA->MODER |= GPIO_MODER_MODE1_1;
 	//Configure PA0 to be used as alternative function TIM5 CH2
 	GPIOA->AFR[0] |= GPIO_AFRL_AFSEL1_1;
 	//Set PA0 to no pull-up, no pull-down
@@ -464,10 +473,10 @@ uint32_t volatile distance2 = 0;
 uint32_t volatile distance3 = 0;
 uint32_t volatile distance4 = 0;
 uint32_t volatile distance5 = 0;
+uint32_t volatile g = 0;
 
 
-int main(void) {
-	//setup the ultrasonic sensor
+int main(void) {	
 	System_Clock_Init();   // System Clock = 80 MHz
 	SysTick_Init();
 	
@@ -497,6 +506,10 @@ int main(void) {
 	Trigger_Setup();
 	
 	LED_Init();
+	
+	UART2_Init();
+	UART2_GPIO_Init();
+	USART_Init(USART2);
 
 	
 	while(1) {
@@ -549,28 +562,28 @@ int main(void) {
 			approach1 = 0;
 		}
 		
-		if ((prev_dis2 - 5)> distance2){
+		if ((prev_dis2 - 4)> distance2){
 			approach2 = 1;
 		}
 		else{
 			approach2 = 0;
 		}
 		
-		if ((prev_dis3 - 5)> distance3){
+		if ((prev_dis3 - 3)> distance3){
 			approach3 = 1;
 		}
 		else{
 			approach3 = 0;
 		}
 		
-		if ((prev_dis4 - 5)> distance4){
+		if ((prev_dis4 - 2)> distance4){
 			approach4 = 1;
 		}
 		else{
 			approach4 = 0;
 		}
 		
-		if ((prev_dis5 - 5)> distance5){
+		if ((prev_dis5 - 1)> distance5){
 			approach5 = 1;
 		}
 		else{
@@ -584,63 +597,50 @@ int main(void) {
 		prev_dis4 = distance4;
 		prev_dis5 = distance5;
 		
-		// Initialize UART -- change the argument depending on the part you are working on
-		UART2_Init();
-		UART2_GPIO_Init();
-		USART_Init(USART2);
-		
-		char rxByte;
-		
-		//If the sensors receive both the signal from ultrasonic and PIR sensor
-		//it will give warning to the pilot on the fighter's control panel, which is LED
-		//And show the threaten's direction and buzzer will warn the pilot also.
 		// Show the result on the LED matrix
-		if (approach1 == 1 && get_thermal1() == 1){//thermal1 detects left sides
-			Detect_1();
-			LED_Default();
-			Buzzer_Trigger_Setup();
+		if (approach1 == 1){
+			g = get_thermal2();
+			if(g == 1){
+				Detect_1();
+				LED_Default();
+				Buzzer_Trigger_Setup1();
+				printf("Our system saved your ass.\n");
+			}
+
 		}
 		
-		if (approach2 == 1 && get_thermal1() == 1){
+		if (approach2 == 1 && get_thermal2()){
 			Detect_2();
 			LED_Default();
-			Buzzer_Trigger_Setup();
+			Buzzer_Trigger_Setup1();
+			printf("Our system saved your ass.\n");
 		}
 		
-		if (approach3 == 1 && get_thermal1() == 1 && get_thermal2() == 1){//central range needs two thermals
+		if (approach3 == 1  && get_thermal2()){
 			Detect_3();
 			LED_Default();
-			Buzzer_Trigger_Setup();
+			Buzzer_Trigger_Setup1();
+			printf("Our system saved your ass.\n");
 		}
 		
-		if (approach4 == 1 && get_thermal2() == 1){//thermal2 detects right sides
+		if (approach4 == 1  && get_thermal1()){
 			Detect_4();
 			LED_Default();
-			Buzzer_Trigger_Setup();
+			Buzzer_Trigger_Setup1();
+			printf("Our system saved your ass.\n");
 		}
 
-		if (approach5 == 1 && get_thermal2() == 1){
+		if (approach5 == 1  && get_thermal1()){
 			Detect_5();
 			LED_Default();
-			Buzzer_Trigger_Setup();
+			Buzzer_Trigger_Setup1();
+			printf("Our system saved your ass.\n");
 		}
+		for (int i = 0; i < 1000000; i++){}
 		
-		//send back the data to the Central Air Intelligence Headquarters by the data link
-		char data;
-		scanf("%c",&data);
-		
-		if (data == 'Y' || data == 'y'){
-			Green_LED_On();
-			printf("XX fighter has been attacked.\n");
-		}
-		
-		else if (data == 'N' || data == 'n'){
-			Green_LED_Off();
-			printf("Defending system works.\n");
-		}
-		
-		else{
-			printf("Please try again with a valid command.\n");
-		}
+		Buzzer_Off();
+	
+	// Initialize UART -- change the argument depending on the part you are working on
+
 	}
 }

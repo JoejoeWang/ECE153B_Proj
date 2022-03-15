@@ -1,6 +1,6 @@
 #include "buzzer.h"
 
-void Buzzer_Trigger_Setup() {
+void Buzzer_Trigger_Setup1() {
 	// Setup PA10
 	
 	// Enable the clock for GPIO Port A
@@ -46,17 +46,13 @@ void Buzzer_Trigger_Setup() {
 	TIM1->CR1 |= TIM_CR1_DIR | TIM_CR1_CEN;
 }
 
-void Buzzer_On(void) {	
-	// Enable High Speed Internal Clock (HSI = 16 MHz)
-	RCC->CR |= RCC_CR_HSION;
-	while ((RCC->CR & RCC_CR_HSIRDY) == 0); // Wait until HSI is ready
-	
-	// Select HSI as system clock source 
-	RCC->CFGR &= ~RCC_CFGR_SW;
-	RCC->CFGR |= RCC_CFGR_SW_HSI;
-	while ((RCC->CFGR & RCC_CFGR_SWS) == 0); // Wait until HSI is system clock source
 
-	// Trigger Setup
-	Buzzer_Trigger_Setup();
+void Buzzer_On(void) {	
+	TIM1->PSC |= 0x0000;
+	TIM1->EGR |= TIM_EGR_UG;
 	
+}
+
+void Buzzer_Off(void){
+	GPIOA->MODER &= ~GPIO_MODER_MODE10;
 }

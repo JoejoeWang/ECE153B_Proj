@@ -1,39 +1,15 @@
+/*
+ * ECE 153B - Winter 2021
+ *
+ * Name(s):
+ * Section:
+ * Lab: 4C
+ */
+
 #include "LED.h"
-#include "SPI.h"
+
 
 void LED_Init(void) {
-	// Enable GPIO Clocks
-		RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
-		RCC->AHB2ENR |=	RCC_AHB2ENR_GPIOCEN;
-	
-	
-	// Initialize Green LED
-    GPIOA->MODER &=	~(3UL<<10);
-		GPIOA->MODER |= 1UL<<10;
-		GPIOA->OTYPER &= ~(1UL<<5);
-		GPIOA->PUPDR &=	~(3UL<<10);
-}
-
-void Green_LED_Off(void) {
-		GPIOA->ODR &= ~1UL<<5;
-}
-
-void Green_LED_On(void) {
-		GPIOA->ODR |= 1UL<<5;
-}
-
-void Green_LED_Toggle(void) {
-	uint32_t check = 1UL<<5;
-	uint32_t status = (GPIOA->ODR & check) == check;
-	if (status == 0){
-		GPIOA->ODR |= 1UL<<5;
-	}
-	else{
-		GPIOA->ODR &= ~1UL<<5;
-	}
-}
-
-void LED_MATRIX_Init(void) {
 	LED_send(0x0900);       //  no decoding
 	LED_send(0x0A03);       //  brightness intensity
 	LED_send(0x0b07);       //  scan limit = 8 LEDs
@@ -109,7 +85,7 @@ void LED_5(void){
 
 
 void Detect_1(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_1();
@@ -119,7 +95,7 @@ void Detect_1(void){
 }
 
 void Detect_2(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_2();
@@ -129,7 +105,7 @@ void Detect_2(void){
 }
 
 void Detect_3(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_3();
@@ -139,7 +115,7 @@ void Detect_3(void){
 }
 
 void Detect_4(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_4();
@@ -149,7 +125,7 @@ void Detect_4(void){
 }
 
 void Detect_5(void){
-	for (int i = 0; i < 20 ; i++){
+	for (int i = 0; i < 5 ; i++){
 		LED_Default();
 		Delay();
 		LED_5();
@@ -167,24 +143,6 @@ void LED_send(uint16_t cmd_data){
 }
 
 void Delay(void){
-	for (int i = 0; i < 1000000; i++){
+	for (int i = 0; i < 200000; i++){
 	}
 }
-
-void present(void){
-	//LED Matrix
-	System_Clock_Init();   // System Clock = 80 MHz
-	SysTick_Init();
-	
-	SPI2_GPIO_Init();
-	SPI2_Init();
-	
-	LED_MATRIX_Init();
-	
-	Detect_1();
-	Detect_2();
-	Detect_3();
-	Detect_4();
-	Detect_5();	
-}
-
